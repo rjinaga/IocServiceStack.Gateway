@@ -1,0 +1,12 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Contracts": "1.0.0-*",
+    "IocServiceStack": "1.0.0-rc-1"
+  },
+
+  "frameworks": {
+    "net46": {}
+  }
+}

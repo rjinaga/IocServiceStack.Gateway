@@ -1,0 +1,30 @@
+﻿{
+  "version": "1.0.0-alpha-2",
+
+  "dependencies": {
+    "IocServiceStack": "1.0.0-rc-1",
+    "Microsoft.AspNetCore.Mvc": "1.0.1"
+  },
+
+  "frameworks": {
+    "net46": {},
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      }
+    }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
+  },
+
+  "packOptions": {
+    "summary": "IocServiceStack.Gateway is a open source .NET library act as conjunction between IocServiceStack.Client and IocServiceStack services.",
+    "tags": [ ".NET", "Dependecy Injection", "IoC", "IocServiceStack" ],
+    "owners": [ "rjinaga" ],
+    "projectUrl": "https://github.com/rjinaga/IocServiceStack.Client"
+  }
+}
