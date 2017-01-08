@@ -10,7 +10,7 @@ IocServiceStack.Gateway is a open source .NET library acts as conjunction betwee
 - .NET Framework 4.6
 
 
-## [NuGet](https://www.nuget.org/packages/IocServiceStack.Gateway/)
+### [NuGet](https://www.nuget.org/packages/IocServiceStack.Gateway/)
 ```
 PM> Install-Package IocServiceStack.Gateway -Pre
 ```
@@ -32,7 +32,7 @@ app.UseMvc(route =>
 
 ```
 
-## Web N Tier Architecture using IocServiceStack, IocServiceStack.Gateway, IocServiceStack.Client 
+### Web N Tier Architecture using IocServiceStack, IocServiceStack.Gateway, IocServiceStack.Client 
 
 https://github.com/rjinaga/Web-N-Tier-Architecture
 

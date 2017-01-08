@@ -23,8 +23,8 @@
 
   "packOptions": {
     "summary": "IocServiceStack.Gateway is a open source .NET library act as conjunction between IocServiceStack.Client and IocServiceStack services.",
-    "tags": [ ".NET", "Dependecy Injection", "IoC", "IocServiceStack" ],
+    "tags": [ ".NET", "Dependency Injection", "IoC", "IocServiceStack" ],
     "owners": [ "rjinaga" ],
-    "projectUrl": "https://github.com/rjinaga/IocServiceStack.Client"
+    "projectUrl": "https://github.com/rjinaga/IocServiceStack.Gateway"
   }
 }
