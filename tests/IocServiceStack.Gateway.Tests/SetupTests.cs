@@ -12,7 +12,7 @@
         public void Setup()
         {
             //Configure method must be invoked, even though if there's no auto mapping required.
-            var configRef = IocServiceProvider.Configure(config => { config.Services(opt => { }); });
+            var configRef = IocServiceProvider.Configure(config => { config.AddServices(opt => { }); });
 
             configRef.GetServiceFactory().Add<ICustomer, CustomerService>();
 

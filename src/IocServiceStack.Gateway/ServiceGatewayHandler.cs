@@ -30,7 +30,7 @@ namespace IocServiceStack.Gateway
 
     public sealed class ServiceGatewayHandler : IServiceGatewayHandler
     {
-        public ServiceResponse Process(ServiceRequest request)
+        public ServiceResponse Process(IServiceManager serviceManager, ServiceRequest request)
         {
             if (!ServiceActionsDictionary.Instance.ContainsKey(request.Signature))
             {
@@ -43,12 +43,12 @@ namespace IocServiceStack.Gateway
                 ServiceActionsDictionary.Instance[request.Signature] = new ServiceActionDescriptor
                 {
                     ContractType = Type.GetType($"{@namespace}{request.ServiceName}, {module}"),
-                    MethodName = request.ActionName
+                    MethodName = request.ActionName,
                 };
             }
 
             ServiceActionDescriptor descriptor = ServiceActionsDictionary.Instance[request.Signature];
-            var result = descriptor.Execute(request.Arguments.ToArray());
+            var result = descriptor.Execute(serviceManager, request.ServiceType, request.Arguments.ToArray());
 
             if (result != null)
             {
@@ -56,6 +56,7 @@ namespace IocServiceStack.Gateway
                 response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
                 return response;
             }
+
             return null;
         }
     }

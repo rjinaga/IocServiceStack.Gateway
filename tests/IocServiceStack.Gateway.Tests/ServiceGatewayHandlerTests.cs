@@ -41,14 +41,14 @@ namespace IocServiceStack.Gateway.Tests
             var args = new RequestBodyParser().Parse(stream);
 
             ServiceRequest request = ServiceRequest.Create(
-                "Contracts.ICustomer", 
+                "Contracts.ICustomer", null,
                 "GetCustomer", 
                 new HeaderDictionary() { ["module"] = "Contracts" } , args);
 
             ServiceGatewayHandler handler = new ServiceGatewayHandler();
 
             //Act
-            var response = handler.Process(request);
+            var response = handler.Process(ServiceManager.Instance, request);
 
             //Assert
             Assert.IsNotNull(response.Body);
@@ -64,13 +64,13 @@ namespace IocServiceStack.Gateway.Tests
             var stream = new MemoryStream(Encoding.UTF8.GetBytes(@"{""Metadata"":null,""Data"":null}"));
             var args = new RequestBodyParser().Parse(stream);
             
-            ServiceRequest request = ServiceRequest.Create("Contracts.ICustomer", "Save",
+            ServiceRequest request = ServiceRequest.Create("Contracts.ICustomer", null, "Save",
               new HeaderDictionary() { ["module"] = "Contracts" }
               ,args );
             ServiceGatewayHandler handler = new ServiceGatewayHandler();
 
             //Act
-            var response = handler.Process(request);
+            var response = handler.Process(ServiceManager.Instance, request);
 
             //Assert
             Assert.IsNull(response?.Body);

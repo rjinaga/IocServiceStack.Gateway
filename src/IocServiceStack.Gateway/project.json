@@ -2,7 +2,7 @@
   "version": "1.0.0-beta-1",
 
   "dependencies": {
-    "IocServiceStack": "1.0.0",
+    "IocServiceStack": "1.1.0-beta-3",
     "Microsoft.AspNetCore.Mvc": "1.0.1"
   },
 

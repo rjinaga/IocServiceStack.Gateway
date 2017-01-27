@@ -27,26 +27,31 @@ namespace IocServiceStack.Gateway
 {
     using System;
     using Microsoft.AspNetCore.Routing;
-    
 
     public static class RouterBuilderExtensions
     {
         /// <summary>
-        /// Maps gateway route to template "ServiceApi/{service}/{operation}"
+        /// Maps gateway route to template "ServiceApi/{service}/{operation}/{serviceType}"
+        /// 
+        /// internal meaning of: {service} is type (class/interface) name of the contract. 
+        /// {type} is type of the service implementation and {type} is optional.
         /// </summary>
         /// <param name="builder"></param>
-        public static void MapServicesGateway(this IRouteBuilder builder)
+        /// <param name="serviceManager">Specify the <see cref="IServiceManager"/> (IocContainer) to be used for access the services</param>
+        public static void MapServicesGateway(this IRouteBuilder builder, IServiceManager serviceManager)
         {
-            string urlTemplate = "ServiceApi/{service}/{operation}";
-            MapServicesGateway(builder, urlTemplate);
+            string urlTemplate = "ServiceApi/{service}/{operation}/{serviceType?}";
+            MapServicesGateway(builder, urlTemplate, serviceManager);
         }
 
-        public static void MapServicesGateway(this IRouteBuilder builder, string urlTemplate)
+        public static void MapServicesGateway(this IRouteBuilder builder, string urlTemplate, IServiceManager serviceManager)
         {
             if (string.IsNullOrEmpty(urlTemplate))
                 throw new ArgumentNullException(nameof(urlTemplate));
 
-            builder.MapRoute(urlTemplate, GatewayRequestProcessor.Process);
+            var processor = new GatewayRequestProcessor(serviceManager);
+
+            builder.MapRoute(urlTemplate, processor.Process);
         }
     }
 }

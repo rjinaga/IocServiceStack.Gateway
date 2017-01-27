@@ -32,21 +32,24 @@ namespace IocServiceStack.Gateway
     {
         public readonly string ServiceName;
         public readonly string ActionName;
+        public readonly string ServiceType;
         public readonly IHeaderDictionary Headers;
         public readonly IEnumerable<Argument> Arguments;
 
-        private ServiceRequest(string serviceName, string actionName, IHeaderDictionary headers, IEnumerable<Argument> arguments)
+        private ServiceRequest(string serviceName, string serviceType, string actionName, IHeaderDictionary headers, IEnumerable<Argument> arguments)
         {
             ServiceName = serviceName;
             ActionName = actionName;
             Headers = headers;
             Arguments = arguments;
+            ServiceType = serviceType;
         }
+
         public string Signature => $"{ServiceName}.{ActionName}";
 
-        public static ServiceRequest Create(string serviceName, string actionName, IHeaderDictionary headers, IEnumerable<Argument> arguments)
+        public static ServiceRequest Create(string serviceName, string serviceType, string actionName, IHeaderDictionary headers, IEnumerable<Argument> arguments)
         {
-            return new ServiceRequest(serviceName, actionName, headers, arguments);
+            return new ServiceRequest(serviceName, serviceType, actionName, headers, arguments);
         }
     }
 }

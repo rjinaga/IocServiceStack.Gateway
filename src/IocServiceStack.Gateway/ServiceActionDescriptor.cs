@@ -32,18 +32,27 @@ namespace IocServiceStack.Gateway
     {
         private MethodInfo _methodInfo;
 
+        /// <summary>
+        /// gets or sets type of contract type
+        /// </summary>
         public Type ContractType;
+
+        /// <summary>
+        /// get or sets name of the method to be executed in the ContractType.
+        /// </summary>
         public string MethodName;
 
-        public object Execute(params Argument[] arguments)
+        public object Execute(IServiceManager serviceManager, string serviceType, params Argument[] arguments)
         {
-            var serviceInstance = ServiceManager.GetService(ContractType);
+            var serviceInstance = string.IsNullOrWhiteSpace(serviceType) ?
+                                    serviceManager.GetService(ContractType) : serviceManager.GetService(ContractType, serviceType);
 
             _methodInfo = ContractType.GetMethod(MethodName);
-            var result =_methodInfo.Invoke(serviceInstance, GetArguments(arguments));
+            var result = _methodInfo.Invoke(serviceInstance, GetArguments(arguments));
 
             return result;
         }
+
 
         private object[] GetArguments(Argument[] arguments)
         {
@@ -58,7 +67,5 @@ namespace IocServiceStack.Gateway
             }
             return args;
         }
-
     }
-    
 }

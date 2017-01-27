@@ -26,21 +26,33 @@
 
 namespace IocServiceStack.Gateway
 {
+    using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
-    using System.Threading.Tasks;
 
     public class GatewayRequestProcessor
     {
-        public static async Task Process(HttpContext context)
+        private readonly IServiceManager _serviceManager;
+
+        public GatewayRequestProcessor(IServiceManager serviceManager)
+        {
+            if (serviceManager == null)
+            {
+                throw new ArgumentNullException(nameof(serviceManager));
+            }
+            _serviceManager = serviceManager;
+        }
+
+        public async Task Process(HttpContext context)
         {
             var routeValues = context.GetRouteData().Values;
 
             IRequestBodyParser parser = new RequestBodyParser();
-            var arguments =parser.Parse(context.Request.Body);
+            var arguments = parser.Parse(context.Request.Body);
 
-            var serviceRequest = ServiceRequest.Create(routeValues["service"].ToString(), routeValues["operation"].ToString(), context.Request.Headers, arguments);
-            ServiceResponse response = new ServiceGatewayHandler().Process(serviceRequest);
+            var serviceRequest = ServiceRequest.Create(routeValues["service"].ToString(), routeValues["serviceType"]?.ToString(), routeValues["operation"].ToString(), context.Request.Headers, arguments);
+            ServiceResponse response = new ServiceGatewayHandler().Process(_serviceManager, serviceRequest);
 
             if (response != null && response.Body != null)
             {

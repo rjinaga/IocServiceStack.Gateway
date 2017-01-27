@@ -2,7 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "IocServiceStack": "1.0.0"
+    "IocServiceStack": "1.1.0-beta-3"
   },
 
   "frameworks": {

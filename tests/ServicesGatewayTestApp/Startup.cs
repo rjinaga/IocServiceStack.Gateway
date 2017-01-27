@@ -56,7 +56,7 @@
 
             app.UseMvc(route =>
             {
-                route.MapServicesGateway();
+                route.MapServicesGateway(ServiceManager.Instance);
             });
 
             RegisterServices();
@@ -64,9 +64,11 @@
         
         public void RegisterServices()
         {
-            var configRef = IocServiceProvider.Configure(config => { config.Services(opt => { }); });
-            configRef.GetServiceFactory().Add<ICustomer, CustomerService>();
-        }
+            var configRef = IocServiceProvider.Configure(config => { });
 
+            configRef.GetServiceFactory().Add<ICustomer, CustomerService>()
+                                         .Add<ICustomer, PlatinumCustomerService>("Platinum");
+
+        }
     }
 }

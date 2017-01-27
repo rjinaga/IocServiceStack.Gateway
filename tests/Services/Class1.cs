@@ -17,4 +17,16 @@ namespace Services
 
         }
     }
+
+    public class PlatinumCustomerService : ICustomer
+    {
+        public Customer GetCustomer(int i, string s)
+        {
+            return new Customer() { Name = i + s + "Platinum" };
+        }
+        public void Save()
+        {
+
+        }
+    }
 }

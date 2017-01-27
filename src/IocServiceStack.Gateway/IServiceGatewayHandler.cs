@@ -27,6 +27,6 @@ namespace IocServiceStack.Gateway
 {
     public interface IServiceGatewayHandler
     {
-        ServiceResponse Process(ServiceRequest request);
+        ServiceResponse Process(IServiceManager serviceManager, ServiceRequest request);
     }
 }
