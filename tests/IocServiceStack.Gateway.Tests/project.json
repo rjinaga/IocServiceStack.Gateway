@@ -9,7 +9,7 @@
     "IocServiceStack.Gateway": "1.0.0-*",
     "Contracts": "1.0.0-*",
     "Services": "1.0.0-*",
-    "IocServiceStack": "1.1.0-beta-3"
+    "IocServiceStack": "1.1.0-rc-final"
   },
 
   "frameworks": {
